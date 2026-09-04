@@ -1,0 +1,625 @@
+/* =========================================
+   Marcelo Torterolo — CV online
+   Dirección: Terminal / shell session
+   Dark-only por diseño (estética de consola real)
+   ========================================= */
+
+:root {
+  --bg: #06090a;
+  --bg-raised: #0c1210;
+  --surface: #0f1613;
+  --line: #1c2b23;
+  --text: #d7f2e2;
+  --text-dim: #6f9a80;
+  --accent: #4fe38a;
+  --accent-2: #ffb454;
+  --accent-soft: rgba(79, 227, 138, 0.1);
+  --danger: #ff6b6b;
+  --font-mono: 'JetBrains Mono', 'SFMono-Regular', ui-monospace, Menlo, Consolas, monospace;
+  --radius: 4px;
+  --container-w: 780px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--container-w);
+  margin: 0 auto;
+  padding: 0 1.25rem;
+}
+
+::selection {
+  background: var(--accent);
+  color: #06120c;
+}
+
+/* ---------- Terminal window chrome ---------- */
+
+.termwin {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--bg-raised);
+  overflow: hidden;
+  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, 0.8);
+}
+
+.termwin__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 0.9rem;
+  background: #0a100d;
+  border-bottom: 1px solid var(--line);
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #2a3a30;
+}
+
+.dot--r { background: #4a2a2a; }
+.dot--y { background: #4a3f2a; }
+.dot--g { background: #2a4a35; }
+
+.termwin__title {
+  margin-left: 0.6rem;
+  font-size: 0.75rem;
+  color: var(--text-dim);
+}
+
+.termwin__body {
+  padding: 1.75rem 1.6rem 2rem;
+}
+
+/* ---------- Hero ---------- */
+
+.hero {
+  padding: 3.5rem 0;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(79, 227, 138, 0.05), transparent 55%),
+    var(--bg);
+}
+
+.hero__body {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.hero__text {
+  flex: 1 1 340px;
+  min-width: 0;
+}
+
+.line {
+  margin: 0 0 0.35rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+.line--out {
+  color: var(--text);
+  padding-left: 1.1rem;
+}
+
+.prompt {
+  color: var(--accent);
+  margin-right: 0.4rem;
+}
+
+.hero__name {
+  font-size: clamp(1.7rem, 5vw, 2.3rem);
+  font-weight: 700;
+  color: #eafff2;
+  margin: 0.2rem 0 0.65rem;
+  letter-spacing: -0.01em;
+  text-wrap: balance;
+}
+
+.hero__name::before {
+  content: '> ';
+  color: var(--accent);
+}
+
+.sep {
+  color: var(--accent);
+  margin: 0 0.3em;
+}
+
+.hero__tagline {
+  color: var(--text-dim);
+  margin-bottom: 0.9rem;
+}
+
+.dim {
+  color: var(--text-dim);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.hero__photo {
+  flex: 0 0 auto;
+  margin: 0;
+  text-align: center;
+}
+
+.hero__photo img {
+  width: 152px;
+  height: 152px;
+  object-fit: cover;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  filter: grayscale(1) contrast(1.15) brightness(0.95) sepia(0.3) hue-rotate(60deg) saturate(2.2);
+  display: block;
+}
+
+.hero__photo figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.68rem;
+  color: var(--text-dim);
+}
+
+/* ---------- Buttons ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1.15rem;
+  border-radius: var(--radius);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: #06130d;
+  font-weight: 600;
+}
+
+.btn--primary:hover {
+  background: #7cf0ac;
+}
+
+.btn--outline {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--line);
+}
+
+.btn--outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- Sections ---------- */
+
+.section {
+  padding: 3.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.section--alt {
+  background: var(--bg-raised);
+}
+
+.cmd {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: var(--accent);
+  margin: 0 0 1.6rem;
+}
+
+.cmd::before {
+  content: '$ ';
+  color: var(--text-dim);
+}
+
+.section__text {
+  color: var(--text-dim);
+  max-width: 66ch;
+  font-size: 0.92rem;
+}
+
+.section__text strong,
+.achievement strong {
+  color: var(--text);
+}
+
+/* ---------- Achievements ---------- */
+
+.achievements {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.achievement {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.achievement__tag {
+  align-self: flex-start;
+  font-size: 0.68rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.18rem 0.5rem;
+  border-radius: 999px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.achievement p {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.88rem;
+}
+
+.achievement strong {
+  color: var(--accent-2);
+}
+
+/* ---------- Trayectoria ---------- */
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+  border-left: 1px solid var(--line);
+}
+
+.timeline__item {
+  position: relative;
+  padding: 0 0 1.5rem 1.4rem;
+}
+
+.timeline__item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline__item::before {
+  content: '';
+  position: absolute;
+  left: -4.5px;
+  top: 0.35rem;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 0 3px var(--bg-raised);
+}
+
+.timeline__period {
+  font-size: 0.7rem;
+  color: var(--text-dim);
+  margin-bottom: 0.3rem;
+}
+
+.timeline__total {
+  color: var(--text-dim);
+  opacity: 0.75;
+}
+
+.timeline__role {
+  margin: 0 0 0.3rem;
+  color: var(--text);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.timeline__desc {
+  margin: 0.25rem 0 0;
+  color: var(--text-dim);
+  font-size: 0.83rem;
+  max-width: 62ch;
+}
+
+.subroles {
+  list-style: none;
+  margin: 0.5rem 0 0;
+  padding: 0 0 0 0.9rem;
+  border-left: 1px dashed var(--line);
+  display: grid;
+  gap: 0.85rem;
+}
+
+.subrole__head {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.subrole__name {
+  color: var(--text);
+  font-size: 0.83rem;
+  font-weight: 600;
+}
+
+.subrole__period {
+  color: var(--accent-2);
+  font-size: 0.68rem;
+}
+
+.subrole .timeline__desc {
+  margin-top: 0.25rem;
+}
+
+/* ---------- Tags / stack ---------- */
+
+.tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.tag {
+  font-size: 0.82rem;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.45rem 0.85rem;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.tag::before {
+  content: '#';
+  color: var(--text-dim);
+  margin-right: 0.15em;
+}
+
+.tag:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+/* ---------- Certificaciones ---------- */
+
+.certs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.cert {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+}
+
+.cert__head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.cert__name {
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.cert__badge {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background: var(--accent-soft);
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+}
+
+.cert__meta {
+  margin: 0.35rem 0 0.55rem;
+  font-size: 0.8rem;
+  color: var(--text-dim);
+}
+
+.cert a {
+  font-size: 0.8rem;
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
+.cert a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Proyectos ---------- */
+
+.projects {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.project {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1rem 1.2rem;
+}
+
+.project__head {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.project__name {
+  color: var(--text);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+.project__name::before {
+  content: '/';
+  color: var(--text-dim);
+}
+
+.project__badge {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 0.12rem 0.45rem;
+  border-radius: 999px;
+}
+
+.project__badge--public {
+  color: var(--accent);
+  background: var(--accent-soft);
+}
+
+.project__badge--private {
+  color: var(--text-dim);
+  background: rgba(111, 154, 128, 0.12);
+}
+
+.project__desc {
+  margin: 0.4rem 0 0.55rem;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.project a {
+  font-size: 0.8rem;
+  color: var(--accent-2);
+  text-decoration: none;
+}
+
+.project a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Contact ---------- */
+
+.contact-list {
+  list-style: none;
+  margin: 0 0 1.75rem;
+  padding: 0;
+  display: grid;
+  gap: 0.65rem;
+}
+
+.contact-list li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 0.65rem;
+  font-size: 0.88rem;
+}
+
+.contact-list__label {
+  font-size: 0.72rem;
+  color: var(--text-dim);
+  min-width: 78px;
+}
+
+.contact-list__label::before {
+  content: '.';
+  color: var(--accent);
+}
+
+.contact-list a,
+.contact-list__value {
+  color: var(--text);
+}
+
+.contact-list a {
+  text-decoration: none;
+  border-bottom: 1px solid var(--line);
+}
+
+.contact-list a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* ---------- Footer ---------- */
+
+.footer {
+  padding: 2rem 0;
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+/* ---------- Responsive ---------- */
+
+@media (min-width: 640px) {
+  .achievements {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .hero__body {
+    flex-direction: column-reverse;
+  }
+  .hero__photo img {
+    width: 96px;
+    height: 96px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
